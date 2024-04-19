@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void selectionSort(int *arr, int n) {
+    int i, j, minIndex, temp;
+    for (i = 0; i < n - 1; i++) {
+        minIndex = i;
+        for (j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        // Swap arr[i] and arr[minIndex]
+        temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+}
+
+int main() {
+    int n, *arr, i;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    // Dynamically allocate memory for the array
+    arr = (int *)malloc(n * sizeof(int));
+
+    if (arr == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
+
+    printf("Enter the elements:\n");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Call selection sort function
+    selectionSort(arr, n);
+
+    printf("Sorted array: ");
+    for (i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    // Free dynamically allocated memory
+    free(arr);
+
+    return 0;
+}
+
+
+
+
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        min_idx = i
+        for j in range(i+1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+
+def main():
+    n = int(input("Enter the number of elements: "))
+    
+    # Dynamically allocate memory for the array
+    arr = []
+    for i in range(n):
+        arr.append(int(input(f"Enter element {i+1}: ")))
+    
+    print("Original array:", arr)
+    selection_sort(arr)
+    print("Sorted array:", arr)
+
+if __name__ == "__main__":
+    main()

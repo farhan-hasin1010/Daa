@@ -1,0 +1,118 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int searchElement(int *arr, int size, int key) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == key)
+            return i;
+    }
+    return -1; // Element not found
+}
+
+int main() {
+    int size, *arr, key, index;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &size);
+
+    // Dynamically allocate memory for the array
+    arr = (int *)malloc(size * sizeof(int));
+    if (arr == NULL) {
+        printf("Memory allocation failed\n");
+        return 1;
+    }
+
+    printf("Enter %d elements:\n", size);
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Enter the element to search: ");
+    scanf("%d", &key);
+
+    index = searchElement(arr, size, key);
+
+    if (index != -1)
+        printf("Element %d found at index %d\n", key, index);
+    else
+        printf("Element %d not found in the array\n", key);
+
+    // Free dynamically allocated memory
+    free(arr);
+
+    return 0;
+}
+
+
+
+
+import ctypes
+
+# Define a class to create a dynamic array
+class DynamicArray:
+    def __init__(self):
+        self.n = 0 # Count of actual elements
+        self.capacity = 1 # Initial capacity
+        self.array = self.make_array(self.capacity)
+    
+    def __len__(self):
+        return self.n
+    
+    def __getitem__(self, k):
+        if not 0 <= k < self.n:
+            return IndexError('Index out of bounds!')
+        return self.array[k]
+    
+    def append(self, element):
+        if self.n == self.capacity:
+            self._resize(2 * self.capacity) # Double the capacity if full
+        self.array[self.n] = element
+        self.n += 1
+    
+    def _resize(self, new_capacity):
+        new_array = self.make_array(new_capacity)
+        for i in range(self.n):
+            new_array[i] = self.array[i]
+        self.array = new_array
+        self.capacity = new_capacity
+    
+    def make_array(self, capacity):
+        return (capacity * ctypes.py_object)()
+    
+# Function to search for an element in the dynamic array
+def search_element(arr, element):
+    for i in range(len(arr)):
+        if arr[i] == element:
+            return i
+    return -1
+
+# Main program
+if __name__ == "__main__":
+    # Create a dynamic array
+    arr = DynamicArray()
+    
+    # Append elements to the array
+    arr.append(10)
+    arr.append(20)
+    arr.append(30)
+    arr.append(40)
+    arr.append(50)
+    
+    # Element to search
+    search_element = 30
+    
+    # Search for the element
+    index = search_element(arr, search_element)
+    
+    # Display the result
+    if index != -1:
+        print(f"Element {search_element} found at index {index}.")
+    else:
+        print(f"Element {search_element} not found.")
+
+
+
+
+
+
+
